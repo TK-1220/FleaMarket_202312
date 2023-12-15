@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\MainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +11,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
 
-Route::get('/', function () {
-    return view('main');
-});
+Route::get('/', [MainController::class, 'index'])->name('home.index');
+
+
+// Route::get('/', function () {
+//     return view('home');
+// });

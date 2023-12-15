@@ -15,7 +15,7 @@ class MainController extends Controller
     {
 
 
-        return view('main');
+        return view('home');
     }
 
     /**
