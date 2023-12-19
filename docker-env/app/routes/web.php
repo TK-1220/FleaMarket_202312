@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\MainController;
-
+use App\Http\Controllers\SampleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,7 +13,18 @@ use App\Http\Controllers\MainController;
 */
 Auth::routes();
 
-Route::get('/', [MainController::class, 'index'])->name('home.index');
+Route::get('/', [MainController::class, 'index'])->name('main.index');
+
+
+
+
+
+Route::get('/sample', [SampleController::class, 'sample']);
+Route::get('/register_comp', [SampleController::class, 'registercomp']);
+Route::get('/register_display', [SampleController::class, 'register_display']);
+Route::get('/register_complete', [SampleController::class, 'register_complete']);
+
+
 
 
 // Route::get('/', function () {

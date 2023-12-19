@@ -1,6 +1,7 @@
 <?php
 
 price_list = [];
+echo "Test Test Test";
 
 ?>
 {{-- @extends('layouts.layout')

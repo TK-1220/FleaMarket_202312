@@ -18,7 +18,7 @@
     </form>
 
     <div>
-        <a href="#">新規登録</a>
+        <a href="{{ route('register') }}">新規登録</a>
     </div>
 
 </main>
