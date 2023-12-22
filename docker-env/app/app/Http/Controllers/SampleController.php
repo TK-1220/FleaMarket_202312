@@ -23,6 +23,35 @@ class SampleController extends Controller
         return view('register_complete');
     }
 
+    public function purchase() {
+        return view('buy_handler');
+    }
+
+    public function buy_complete() {
+        return view('buy_comp');
+    }
+
+    public function mypage_edit() {
+        return view('mypage_edit');
+    }
+
+    public function reset() {
+        return view('reset');
+    }
+
+    public function mypage() {
+        return view('mypage');
+    }
+
+    public function detail() {
+        return view('detail');
+    }
+
+    public function display() {
+        return view('display');
+    }
+
+
 }
 
 

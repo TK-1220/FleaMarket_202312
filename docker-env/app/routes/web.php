@@ -21,12 +21,20 @@ Route::get('/', [MainController::class, 'index'])->name('main.index');
 
 Route::get('/sample', [SampleController::class, 'sample']);
 Route::get('/register_comp', [SampleController::class, 'registercomp']);
-Route::get('/register_display', [SampleController::class, 'register_display']);
+Route::get('/register_display', [SampleController::class, 'register_display'])->name('register.display');
 Route::get('/register_complete', [SampleController::class, 'register_complete']);
+Route::get('/purchase', [SampleController::class, 'purchase']);
+Route::get('/buy_complete', [SampleController::class, 'buy_complete']);
+Route::get('/mypage_edit', [SampleController::class, 'mypage_edit'])->name('my.edit');
+Route::get('/reset', [SampleController::class, 'reset']);
+Route::get('/mypage', [SampleController::class, 'mypage']);
+Route::get('/detail', [SampleController::class, 'detail'])->name('detail.form');
+Route::get('/display', [SampleController::class, 'display']);
+
 
 
 
 
 // Route::get('/', function () {
-//     return view('home');
-// });
+    //     return view('home');
+    // });
