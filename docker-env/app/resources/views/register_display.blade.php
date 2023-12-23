@@ -47,7 +47,7 @@
             <textarea class='form-control' name='comment'></textarea>
         </div>
 
-        <button type='submit'>Registration</button>
+        <button type='submit' class='btn btn-danger'>Registration</button>
     </form>
 
 

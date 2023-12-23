@@ -13,7 +13,7 @@
             <label for="password">パスワード</label>
             <input for="password" class="form-control" id="passward" name="password" />
         </div>
-        <a href="#">パスワードを忘れた方はこちら</a>
+        <a href="{{ route('password.email') }}">パスワードを忘れた方はこちら</a>
         <button type="submit" class="btn btn-primary">ログイン</button>
     </form>
 

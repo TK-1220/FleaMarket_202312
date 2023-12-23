@@ -13,7 +13,13 @@ use App\Http\Controllers\SampleController;
 */
 Auth::routes();
 
+
+
+// Route::group(['middleware' => 'auth'], function() {})
 Route::get('/', [MainController::class, 'index'])->name('main.index');
+
+
+
 
 
 
