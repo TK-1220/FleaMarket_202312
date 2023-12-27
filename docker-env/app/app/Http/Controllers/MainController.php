@@ -1,8 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\ListBuys;
+use App\ListDisplays;
+use App\Follows;
+
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class MainController extends Controller
 {
@@ -13,9 +19,12 @@ class MainController extends Controller
      */
     public function index(Request $request)
     {
+        $datalist = new ListDisplays;
+        $datalist = $datalist->all();
 
-
-        return view('main');
+        return view('main', [
+            'datalist' => $datalist,
+        ]);
     }
 
     /**

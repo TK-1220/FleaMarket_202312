@@ -1,5 +1,6 @@
 <?php
 
+$user_id = 1;
 ?>
 <style>
     div {
@@ -26,28 +27,31 @@
 <main>
     <h1>Registration Display</h1>
 
-    <form action='#' method="post">
+    <form action='{{ route("register.display") }}' method="post" enctype="multipart/form-data">
         @csrf
-        <input type="file" accept="image/png, image/jpeg" onchange="preview(this)" name="image">
+
+        <input type='hidden' name='user_id' value="{{$user_id}}"">
+
+        <input type="file" id="file" class='form-control' accept="image/png, image/jpeg" onchange="preview(this)" name="image">
         <div id="preview"></div>
 
-        <label name='display_name'>Display Name</label>
-        <input type='text' class='form-control' value='' />
+        <label name='name'>出品名</label>
+        <input type='text' class='form-control' name='name' value='' />
 
-        <label name='price'>Price</label>
-        <input type='text' class='form-control' value='' />
+        <label name='price'>値段</label>
+        <input type='text' class='form-control' name='price' value='' />
 
         <div>
-            <label name='display_status'>display status</label>
+            <label name='status'>出品商品の状態</label>
             <input type='type'>
         </div>
 
-        <label name='description'>Description for Display</label>
+        <label name='description'>出品の説明</label>
         <div>
-            <textarea class='form-control' name='comment'></textarea>
+            <textarea class='form-control' name='profile'></textarea>
         </div>
 
-        <button type='submit' class='btn btn-danger'>Registration</button>
+        <button type='submit' class='btn btn-danger'>出品登録</button>
     </form>
 
 

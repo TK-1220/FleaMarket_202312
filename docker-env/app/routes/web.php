@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SampleController;
+use App\Http\Controllers\RegistrationController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,19 +17,19 @@ Auth::routes();
 
 
 
-// Route::group(['middleware' => 'auth'], function() {})
-Route::get('/', [MainController::class, 'index'])->name('main.index');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', [MainController::class, 'index'])->name('main.index');
 
-
-
-
+    Route::get('/register_display', [RegistrationController::class, 'index'])->name('register.display');
+    Route::post('/register_display', [RegistrationController::class, 'store']);
+ });
 
 
 
 
 Route::get('/sample', [SampleController::class, 'sample']);
 Route::get('/register_comp', [SampleController::class, 'registercomp']);
-Route::get('/register_display', [SampleController::class, 'register_display'])->name('register.display');
+// Route::get('/register_display', [SampleController::class, 'register_display'])->name('register.display');
 Route::get('/register_complete', [SampleController::class, 'register_complete']);
 Route::get('/purchase', [SampleController::class, 'purchase']);
 Route::get('/buy_complete', [SampleController::class, 'buy_complete']);

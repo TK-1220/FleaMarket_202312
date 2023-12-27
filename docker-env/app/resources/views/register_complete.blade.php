@@ -3,7 +3,7 @@
 ?>
 
 <main>
-    <h1>Process Complete</h1>
+    <h1>出品登録が完了しました</h1>
 
     <a href="{{ route('main.index') }}">
         <button>メインページへ戻る</button>

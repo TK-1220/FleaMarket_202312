@@ -6,30 +6,66 @@ $price_list = [
 ['3000', '4000'],
 ['4000', '5000'],
 ];
+
+// echo 'test';
+echo $datalist;
+
 ?>
+
+@if(Auth::check())
+<span class="my-navbar-item">{{ Auth::user()->name }}</span>
+/
+<a href="#" id="logout" class="my-nabvar-item">ログアウト</a>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+</form>
+<script>
+    document.getElementById('logout').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('logout-form').submit();
+    });
+</script>
+@else
+    <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+    /
+    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+@endif
+
 
 <main>
     <h1>main page</h1>
     <div class='container'>
         <form action={{ route("main.index") }} method="post">
             @csrf
-            <label for='name'>Search keyward</label>
+            <label for='name'>キーワード検索</label>
             <input type="text" class='form-control' name='keyward' value='keyward' />
 
 
-            <label for='type'>price area</label>
+            <label for='type'>価格</label>
             <select name='price' class='form-control'>
-                <option value=''>価格帯</option>
                 @foreach($price_list as $price)
                 <option value='' selected>{{ $price[0] }}~{{ $price[1] }}</option>
                 @endforeach
+                <option value=''>価格帯</option>
             </select>
 
             <button type='submit' class='btn'>検索</button>
         </form>
     </div>
 
+    <h2>出品一覧</h2>
+    @foreach($datalist as $data)
+    <img src="{{ asset('storage/' . $data['image']) }}">
+    <h3>出品名：{{ $data['name'] }}</h3>
+    {{-- <a href="{{ route('display.detail') }}">{{ $data['name'] }}</a> --}}
+    <a href="#">{{ $data['name'] }}</a>
+    <label for='price'>{{ $data['price'] }}円</label>
+    @endforeach
 
+
+
+
+</main>
 
 
 

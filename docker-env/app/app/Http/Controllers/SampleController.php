@@ -15,9 +15,9 @@ class SampleController extends Controller
         return view('register_comp');
     }
 
-    public function register_display() {
-        return view('register_display');
-    }
+    // public function register_display() {
+    //     return view('register_display');
+    // }
 
     public function register_complete() {
         return view('register_complete');
