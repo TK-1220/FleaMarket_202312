@@ -21,7 +21,6 @@ class MainController extends Controller
     {
         $datalist = new ListDisplays;
         $datalist = $datalist->all();
-
         return view('main', [
             'datalist' => $datalist,
         ]);

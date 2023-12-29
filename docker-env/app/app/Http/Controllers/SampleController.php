@@ -43,9 +43,9 @@ class SampleController extends Controller
         return view('mypage');
     }
 
-    public function detail() {
-        return view('detail');
-    }
+    // public function detail() {
+    //     return view('detail');
+    // }
 
     public function display() {
         return view('display');

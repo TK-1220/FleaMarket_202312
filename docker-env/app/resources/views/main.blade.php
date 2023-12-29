@@ -7,8 +7,6 @@ $price_list = [
 ['4000', '5000'],
 ];
 
-// echo 'test';
-echo $datalist;
 
 ?>
 
@@ -49,7 +47,7 @@ echo $datalist;
                 <option value=''>価格帯</option>
             </select>
 
-            <button type='submit' class='btn'>検索</button>
+            <button type='submit' class='btn primary-btn'>検索</button>
         </form>
     </div>
 
@@ -57,8 +55,9 @@ echo $datalist;
     @foreach($datalist as $data)
     <img src="{{ asset('storage/' . $data['image']) }}">
     <h3>出品名：{{ $data['name'] }}</h3>
-    {{-- <a href="{{ route('display.detail') }}">{{ $data['name'] }}</a> --}}
-    <a href="#">{{ $data['name'] }}</a>
+    <?php echo 'test001'; ?>
+    <a href="{{ route('detail.display', ['displayId' => $data['id']]) }}">{{ $data['name'] }}</a>
+    {{-- <a href="#">{{ $data['id'] }}</a> --}}
     <label for='price'>{{ $data['price'] }}円</label>
     @endforeach
 

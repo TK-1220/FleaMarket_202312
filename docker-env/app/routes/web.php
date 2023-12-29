@@ -2,6 +2,8 @@
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\DisplayController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +17,13 @@ use App\Http\Controllers\RegistrationController;
 */
 Auth::routes();
 
-
-
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [MainController::class, 'index'])->name('main.index');
 
     Route::get('/register_display', [RegistrationController::class, 'index'])->name('register.display');
     Route::post('/register_display', [RegistrationController::class, 'store']);
+    Route::get('/{displayId}/detail', [DisplayController::class, 'detail'])->name('detail.display');
+    Route::post('/{displayId}/detail', [DisplayController::class, 'detail']);
  });
 
 
@@ -36,7 +38,7 @@ Route::get('/buy_complete', [SampleController::class, 'buy_complete']);
 Route::get('/mypage_edit', [SampleController::class, 'mypage_edit'])->name('my.edit');
 Route::get('/reset', [SampleController::class, 'reset']);
 Route::get('/mypage', [SampleController::class, 'mypage']);
-Route::get('/detail', [SampleController::class, 'detail'])->name('detail.form');
+// Route::get('/detail', [SampleController::class, 'detail'])->name('detail.form');
 Route::get('/display', [SampleController::class, 'display']);
 
 
