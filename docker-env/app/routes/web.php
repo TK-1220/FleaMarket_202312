@@ -3,7 +3,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DisplayController;
-
+use App\Http\Controllers\MyToolController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,12 +19,24 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/', [MainController::class, 'index'])->name('main.index');
+    // Route::post('/', [MainController::class, 'search']);
 
-    Route::get('/register_display', [RegistrationController::class, 'index'])->name('register.display');
-    Route::post('/register_display', [RegistrationController::class, 'store']);
-    Route::get('/{displayId}/detail', [DisplayController::class, 'detail'])->name('detail.display');
-    Route::post('/{displayId}/detail', [DisplayController::class, 'detail']);
- });
+    // Register
+    Route::get('/registration/register', [RegistrationController::class, 'index'])->name('register.display');
+    Route::post('/registration/register', [RegistrationController::class, 'store']);
+    Route::get('/registration/{displayId}/edit', [RegistrationController::class, 'edit'])->name('edit.display');
+    Route::post('/registration/{displayId}/edit', [RegistrationController::class, 'update']);
+
+    // Detail
+    Route::get('/display/{displayId}/detail', [DisplayController::class, 'detail'])->name('detail.display');
+    Route::post('/display/{displayId}/detail', [DisplayController::class, 'detail']);
+
+    //My Page
+    Route::get('/mypage/{user_id}/home', [MyToolController::class, 'index'])->name('mypage.index');
+    Route::get('/mypage/{user_id}/edit', [MyToolController::class, 'edit'])->name('mypage.edit');
+    Route::post('/mypage/{user_id}/edit', [MyToolController::class, 'update']);
+
+});
 
 
 
@@ -35,9 +47,9 @@ Route::get('/register_comp', [SampleController::class, 'registercomp']);
 Route::get('/register_complete', [SampleController::class, 'register_complete']);
 Route::get('/purchase', [SampleController::class, 'purchase']);
 Route::get('/buy_complete', [SampleController::class, 'buy_complete']);
-Route::get('/mypage_edit', [SampleController::class, 'mypage_edit'])->name('my.edit');
+// Route::get('/mypage_edit', [SampleController::class, 'mypage_edit'])->name('my.edit');
 Route::get('/reset', [SampleController::class, 'reset']);
-Route::get('/mypage', [SampleController::class, 'mypage']);
+// Route::get('/mypage', [SampleController::class, 'mypage']);
 // Route::get('/detail', [SampleController::class, 'detail'])->name('detail.form');
 Route::get('/display', [SampleController::class, 'display']);
 

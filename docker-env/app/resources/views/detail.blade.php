@@ -1,6 +1,5 @@
 <?php
 
-
 ?>
 <span class="my-navbar-item">{{ Auth::user()->name }}</span>
 /
@@ -9,13 +8,16 @@
 <main>
     <h1>商品詳細</h1>
 
-    <img src="{{ asset($dis_img) }}" name='display_img'>
+    <img src="{{ asset($dis_img) }}" name='display_img' width="500">
 
     <div>
-        <img src="{{ asset($icon_img) }}" name='icon_img' width="100" height="100">
-        <label name='user_name'>{{ $user['name'] }}</label>
+        <h2>出品者</h2>
 
-        {{-- <form action="{{ route('detail.form') }}" method='post'> --}}
+        <img src="{{ asset($icon_img) }}" name='icon_img' width="100">
+        {{-- <a href="{{ route('mypage.show', ['user_id' => $user['id']]) }}"> --}}
+        <a href="#">
+            <label name='user_name'>{{ $user['name'] }}</label>
+        </a>
         <form action="#" method='post'>
             <button type='submit'>フォロー</button>
         </form>
@@ -30,12 +32,12 @@
     <textarea name='comment'>{{ $data['comment'] }}</textarea>
 
     @if($data['user_id'] == Auth::user()->id)
-    <a href="#">編集</a>
+        <a href="{{ route('edit.display', ['displayId' => $data['id']]) }}">編集</a>
     @else
     @endif
 
-    <a href="{{ route('main.index') }}">
-        <button class='btn'>メインページへ戻る</button>
+    <a href={{ $prevurl }}>
+        <button class='btn'>戻る</button>
     </a>
 
 </main>

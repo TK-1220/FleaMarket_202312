@@ -31,17 +31,12 @@ class SampleController extends Controller
         return view('buy_comp');
     }
 
-    public function mypage_edit() {
-        return view('mypage_edit');
-    }
 
     public function reset() {
         return view('reset');
     }
 
-    public function mypage() {
-        return view('mypage');
-    }
+
 
     // public function detail() {
     //     return view('detail');

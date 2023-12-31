@@ -19,14 +19,15 @@
         </div>
         <a href="{{ route('password.email') }}">パスワードを忘れた方はこちら</a>
         <button type="submit" class="btn btn-primary">ログイン</button>
-
-        {{-- <button type="submit" class="btn btn-primary">ゲストで閲覧</button> --}}
     </form>
 
     <div>
         <a href="{{ route('register') }}">新規登録</a>
     </div>
 
+    <div>
+        <a href="{{ route('main.index') }}">メインページへ</a>
+    </div>
 
 
 </main>

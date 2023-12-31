@@ -1,13 +1,13 @@
 <?php
 
-
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\ListBuys;
 use App\ListDisplays;
 use App\Follows;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\Auth;
 
 class RegistrationController extends Controller
 {
@@ -44,14 +44,21 @@ class RegistrationController extends Controller
     */
     public function store(Request $request)
     {
+        $dir = 'img_display/';
+        $filename = $request->file('image')->getClientOriginalName();
+        $filepath =  'storage/' . $dir . $filename;
+
         $model = new ListDisplays;
         $columns = ['name', 'image', 'price', 'profile', 'user_id'];
-        foreach($columns as $column) {
-            $model->$column = $request->$column;
+        foreach ($columns as $column) {
+            if ($column == 'image') {
+                $model->$column = $filepath;
+                $request->file('image')->storeAs('public/' . $dir, $filename);
+            } else {
+                $model->$column = $request->$column;
+            }
         }
         $model->save();
-
-        $request->file('image')->store('');
         return redirect('/register_complete');
     }
 
@@ -61,9 +68,9 @@ class RegistrationController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function show($id)
+    public function show()
     {
-        //
+
     }
 
     /**
@@ -72,9 +79,17 @@ class RegistrationController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function edit($id)
+    public function edit(int $displayId)
     {
-        //
+        $prevurl = url()->previous();
+        $display = new ListDisplays;
+        $display = $display->find($displayId)->toArray();
+
+        return view('register_edit', [
+            'displayId' => $displayId,
+            'display' => $display,
+            'prevurl' => $prevurl,
+        ]);
     }
 
     /**
@@ -84,9 +99,21 @@ class RegistrationController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function update(Request $request, $id)
+    public function update(Request $request, $displayId)
     {
-        //
+        $model = new ListDisplays;
+        $model = $model->find($displayId);
+        $columns = ['name', 'price', 'profile'];
+        foreach ($columns as $column) {
+            if (!isset($request->$column)) {
+                continue;
+            } else {
+                $model->$column = $request->$column;
+            }
+        }
+        $model -> save();
+        $url = $request['prevurl'];
+        return redirect($url);
     }
 
     /**

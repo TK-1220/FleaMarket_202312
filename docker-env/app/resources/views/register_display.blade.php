@@ -1,6 +1,5 @@
 <?php
 
-$user_id = 1;
 ?>
 <style>
     div {
@@ -25,15 +24,17 @@ $user_id = 1;
 </script>
 
 <main>
-    <h1>Registration Display</h1>
+    <h1>出品登録</h1>
 
-    <form action='{{ route("register.display") }}' method="post" enctype="multipart/form-data">
+    <form action="{{ route('register.display') }}" method="post" enctype="multipart/form-data">
         @csrf
 
-        <input type='hidden' name='user_id' value="{{$user_id}}"">
+        <input type='hidden' name='user_id' value="{{ Auth::user()->id }}">
 
-        <input type="file" id="file" class='form-control' accept="image/png, image/jpeg" onchange="preview(this)" name="image">
-        <div id="preview"></div>
+        <div>
+            <input type="file" id="file" class='form-control' accept="image/png, image/jpeg" onchange="preview(this)" name="image">
+            <div id="preview"></div>
+        </div>
 
         <label name='name'>出品名</label>
         <input type='text' class='form-control' name='name' value='' />
@@ -55,7 +56,7 @@ $user_id = 1;
     </form>
 
 
- </main>
+</main>
 
 
 
