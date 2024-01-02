@@ -122,8 +122,12 @@ class RegistrationController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy($id)
+    public function destroy($displayId)
     {
-        //
+        $model = new ListDisplays;
+        $model = $model->find($displayId);
+        var_dump($model);
+        $model->delete();
+        return redirect('/');
     }
 }

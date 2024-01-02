@@ -17,18 +17,19 @@
         <input type='text' class='form-control' name='price' value={{ $display['price'] }} />
 
         <div>
-            <label name='status'>出品商品の状態</label>
+            <label name='status'>状態</label>
             <input type='type'>
         </div>
 
-        <label name='description'>出品の説明</label>
+        <label name='description'>説明</label>
         <div>
             <textarea class='form-control' name='profile'>{{ $display['profile'] }}</textarea>
         </div>
-
         <button type='submit' class='btn btn-danger'>完了</button>
     </form>
-
+    <a href="{{ route('delete.display', ['displayId' => $displayId]) }}">
+        <button class='btn btn-danger'>削除</button>
+    </a>
 
 </main>
 

@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\SampleController;
 use App\Http\Controllers\RegistrationController;
@@ -26,6 +28,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/registration/register', [RegistrationController::class, 'store']);
     Route::get('/registration/{displayId}/edit', [RegistrationController::class, 'edit'])->name('edit.display');
     Route::post('/registration/{displayId}/edit', [RegistrationController::class, 'update']);
+    Route::get('/registration/{displayId}/delete', [RegistrationController::class, 'destroy'])->name('delete.display');
 
     // Detail
     Route::get('/display/{displayId}/detail', [DisplayController::class, 'detail'])->name('detail.display');
@@ -35,6 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/mypage/{user_id}/home', [MyToolController::class, 'index'])->name('mypage.index');
     Route::get('/mypage/{user_id}/edit', [MyToolController::class, 'edit'])->name('mypage.edit');
     Route::post('/mypage/{user_id}/edit', [MyToolController::class, 'update']);
+    Route::get('/mypage/{user_id}/delete', [MyToolController::class, 'destroy'])->name('mypage.delete');
 
 });
 

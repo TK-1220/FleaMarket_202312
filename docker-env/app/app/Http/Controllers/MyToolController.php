@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\ListDisplays;
-
+use PhpParser\Builder\Use_;
 
 class MyToolController extends Controller
 {
@@ -104,8 +104,15 @@ class MyToolController extends Controller
     * @param  int  $id
     * @return \Illuminate\Http\Response
     */
-    public function destroy($id)
+    public function destroy(Request $request, $user_id)
     {
-        //
+        $accounts = User::find($user_id);
+        if ($request->flag == 1) {
+            $accounts->del_flg = 1;
+            $accounts->save();
+        } else {
+            $accounts->delete();
+        }
+        return redirect('/');
     }
 }

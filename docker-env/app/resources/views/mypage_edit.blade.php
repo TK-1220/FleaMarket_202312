@@ -44,16 +44,20 @@
         </div>
 
         <div>
+            <label for='image'>プロフィール画像</label>
             <input type="file" id="file" class='form-control' accept="image/png, image/jpeg" onchange="preview(this)" name="image">
             <div id="preview"></div>
         </div>
 
         <div>
-            <button>編集完了</button>
+            <button type='submit' class='btn'>編集完了</button>
         </div>
-
-        <button>退会</button>
     </form>
+    <div>
+        <a href="{{ route('mypage.delete', ['user_id' => Auth::user()->id, 'flag' => true]) }}">
+            <button class='btn'>退会</button>
+        </a>
+    </div>
 
 
 </main>

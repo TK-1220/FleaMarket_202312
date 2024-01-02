@@ -10,7 +10,7 @@ $price_list = [
 
 ?>
 
-@if(Auth::check())
+@if(Auth::check() && Auth::user()->del_flg == 0)
 <span class="my-navbar-item">{{ Auth::user()->name }}</span>
 /
 <a href="{{ route('mypage.index', ['user_id' => Auth::user()->id]) }}" id='mypage'>マイページ</a>
