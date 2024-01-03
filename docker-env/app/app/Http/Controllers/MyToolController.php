@@ -18,6 +18,8 @@ class MyToolController extends Controller
     {
         $displays = ListDisplays::where('user_id', $user_id)->get();
 
+        // $historys = ListDisplays
+
         return view('mypage', [
             'displays' => $displays,
         ]);
@@ -28,17 +30,7 @@ class MyToolController extends Controller
     *
     * @return \Illuminate\Http\Response
     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
     public function store(Request $request)
     {
         //
@@ -53,6 +45,7 @@ class MyToolController extends Controller
     public function show($id)
     {
         //
+        return view('follow');
     }
 
     /**
@@ -111,7 +104,7 @@ class MyToolController extends Controller
             $accounts->del_flg = 1;
             $accounts->save();
         } else {
-            $accounts->delete();
+            $accounts->delete;
         }
         return redirect('/');
     }

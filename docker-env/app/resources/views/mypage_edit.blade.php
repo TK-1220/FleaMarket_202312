@@ -23,6 +23,8 @@
     }
 </style>
 
+@extends('layouts.layout')
+@section('content')
 
 <main>
     <h1>マイページ編集</h1>
@@ -63,7 +65,7 @@
 </main>
 
 
-
+@endsection
 
 
 

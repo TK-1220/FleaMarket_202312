@@ -18,10 +18,13 @@ use App\Http\Controllers\MyToolController;
 |
 */
 Auth::routes();
+Route::get('/', [MainController::class, 'index'])->name('main.index');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/', [MainController::class, 'index'])->name('main.index');
-    // Route::post('/', [MainController::class, 'search']);
+    Route::post('ajaxlike', 'MainController@ajaxlike')->name('main.ajaxlike');
+    Route::post('/', [MainController::class, 'search']);
+    Route::get('/purchase/{displayId}/form', [MainController::class, 'handler'])->name('main.handler');
+    Route::post('/purchase/{displayId}/form', [MainController::class, 'procedure']);
 
     // Register
     Route::get('/registration/register', [RegistrationController::class, 'index'])->name('register.display');
@@ -33,6 +36,8 @@ Route::group(['middleware' => 'auth'], function() {
     // Detail
     Route::get('/display/{displayId}/detail', [DisplayController::class, 'detail'])->name('detail.display');
     Route::post('/display/{displayId}/detail', [DisplayController::class, 'detail']);
+    Route::get('/display/{user_id}/profile', [DisplayController::class, 'profile'])->name('profile.index');
+    Route::post('/display/{user_id}/profile', [DisplayController::class, 'follow']);
 
     //My Page
     Route::get('/mypage/{user_id}/home', [MyToolController::class, 'index'])->name('mypage.index');
@@ -45,7 +50,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 
 
-Route::get('/sample', [SampleController::class, 'sample']);
+// Route::get('/sample', [SampleController::class, 'sample']);
 Route::get('/register_comp', [SampleController::class, 'registercomp']);
 // Route::get('/register_display', [SampleController::class, 'register_display'])->name('register.display');
 Route::get('/register_complete', [SampleController::class, 'register_complete']);

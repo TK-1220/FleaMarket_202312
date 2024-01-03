@@ -1,9 +1,9 @@
 <?php
 
 ?>
-<span class="my-navbar-item">{{ Auth::user()->name }}</span>
-/
-<a href="#" id="logout" class="my-nabvar-item">ログアウト</a>
+
+@extends('layouts.layout')
+@section('content')
 
 <main>
     <h1>商品詳細</h1>
@@ -14,13 +14,9 @@
         <h2>出品者</h2>
 
         <img src="{{ asset($icon_img) }}" name='icon_img' width="100">
-        {{-- <a href="{{ route('mypage.show', ['user_id' => $user['id']]) }}"> --}}
-        <a href="#">
+        <a href="{{ route('profile.index', ['user_id' => $user['id']]) }}">
             <label name='user_name'>{{ $user['name'] }}</label>
         </a>
-        <form action="#" method='post'>
-            <button type='submit'>フォロー</button>
-        </form>
         <textarea name='profile'>{{ $user['profile'] }}</textarea>
     </div>
 
@@ -40,6 +36,7 @@
         <button class='btn'>戻る</button>
     </a>
 
+    @endsection
 </main>
 
 

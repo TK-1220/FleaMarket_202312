@@ -1,63 +1,34 @@
 <?php
-$price_list = [
-['0', '1000'],
-['1000', '2000'],
-['2000', '3000'],
-['3000', '4000'],
-['4000', '5000'],
-];
-
-
+$prices = array();
+for ($i=0; $i<50000; $i=$i+5000) { array_push($prices, [$i, $i+5000]); }
 ?>
-
-@if(Auth::check() && Auth::user()->del_flg == 0)
-<span class="my-navbar-item">{{ Auth::user()->name }}</span>
-/
-<a href="{{ route('mypage.index', ['user_id' => Auth::user()->id]) }}" id='mypage'>マイページ</a>
-/
-<a href="#" id="logout" class="my-nabvar-item">ログアウト</a>
-
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-    @csrf
-</form>
-<script>
-    document.getElementById('logout').addEventListener('click', function(event) {
-        event.preventDefault();
-        document.getElementById('logout-form').submit();
-    });
-</script>
-
-@else
-<a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
-/
-<a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
-@endif
-
+@extends('layouts.layout')
+@section('content')
 
 <main>
     <h1>Flea Market</h1>
-    <div class='container'>
-        <form action={{ route("main.index") }} method="post">
-            @csrf
-            <div>
-                <label for='name'>キーワード</label>
-                <input type="text" class='form-control' name='keyward' value='keyward' />
-            </div>
-            <div>
-                <label for='type'>価格</label>
-                <select name='price' class='form-control'>
-                    @foreach($price_list as $price)
-                    <option value='' selected>{{ $price[0] }}~{{ $price[1] }}</option>
-                    @endforeach
-                    <option value=''>価格帯</option>
-                </select>
-            </div>
-            <button type='submit' class='btn primary-btn'>検索</button>
-        </form>
-    </div>
+
+    <form action={{ route("main.index") }} method="post">
+        @csrf
+        <div>
+            <label for='name'>キーワード</label>
+            <input type="text" class='form-control' name='keyword' value={{ $keyword }} >
+        </div>
+        <div>
+            <label for='type'>価格</label>
+            <select name='price' class='form-control'>
+                <option value=''>価格帯</option>
+                @foreach($prices as $price)
+                <option value={{ $price[0] }}> {{ $price[0] }}円 ~ {{ $price[1] }}円 </option>
+                @endforeach
+            </select>
+        </div>
+        <button type='submit'>検索</button>
+    </form>
 
     <h2>出品一覧</h2>
     @foreach($datalist as $data)
+    @if($data['del_flg'] == 0)
     <div>
         <h3>出品名：
             <a href="{{ route('detail.display', ['displayId' => $data['id']]) }}">{{ $data['name'] }}</a>
@@ -67,7 +38,25 @@ $price_list = [
         </div>
         <label for='price'>{{ $data['price'] }}円</label>
         <a href="{{ route('detail.display', ['displayId' => $data['id']]) }}">詳細</a>
+        <a href="{{ route('main.handler', ['displayId' => $data['id']]) }}">
+            <button>購入</button>
+        </a>
     </div>
+
+
+    @if($like_model->like_exist(Auth::user()->id, $data->id))
+    <p class="favorite-marke">
+        <a class="js-like-toggle loved" href="" data-displayid="{{ $data->id }}">いいね<i class="fas fa-heart"></i></a>
+        <span class="likesCount">{{$data->likes_count}}</span>
+    </p>
+    @else
+    <p class="favorite-marke">
+        <a class="js-like-toggle" href="" data-displayid="{{ $data->id }}">いいね<i class="fas fa-heart"></i></a>
+        <span class="likesCount">{{$data->likes_count}}</span>
+    </p>
+    @endif
+    @endif
+    <input type='hidden' name='display_id' value={{ $data->id }}>
     @endforeach
 
 </main>
@@ -75,10 +64,10 @@ $price_list = [
 
 
 
+​
+
+@endsection
 
 
 
-
-
-</main>
 

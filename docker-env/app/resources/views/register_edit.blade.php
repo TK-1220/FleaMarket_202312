@@ -1,4 +1,7 @@
 
+
+@extends('layouts.layout')
+@section('content')
 <main>
     <h1>出品編集</h1>
 
@@ -33,7 +36,4 @@
 
 </main>
 
-
-
-
-
+@endsection

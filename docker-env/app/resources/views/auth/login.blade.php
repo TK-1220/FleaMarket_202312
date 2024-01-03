@@ -8,8 +8,6 @@
     <form action="{{ route('login') }}" method="POST">
         @csrf
         <div class="form-group">
-            {{-- <label for="name">ユーザー名</label> --}}
-            {{-- <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" /> --}}
             <label for="email">メールアドレス</label>
             <input type="text" class="form-control" id="email" name="email" value="{{ old('email') }}" />
     </div>

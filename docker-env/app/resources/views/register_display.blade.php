@@ -1,6 +1,9 @@
 <?php
 
 ?>
+
+@extends('layouts.layout')
+@section('content')
 <style>
     div {
         width:50vw;
@@ -58,8 +61,4 @@
 
 </main>
 
-
-
-
-
-
+@endsection

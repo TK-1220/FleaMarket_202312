@@ -12,4 +12,8 @@ class ListDisplays extends Model
     public function display() {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
+
+    public function likes() {
+        return $this->belongsTo('App\Like', 'id', 'display_id');
+    }
 }
