@@ -21,7 +21,7 @@ Auth::routes();
 Route::get('/', [MainController::class, 'index'])->name('main.index');
 
 Route::group(['middleware' => 'auth'], function() {
-    Route::post('ajaxlike', 'MainController@ajaxlike')->name('main.ajaxlike');
+    Route::post('/ajaxlike', 'MainController@ajaxlike')->name('main.ajaxlike');
     Route::post('/', [MainController::class, 'search']);
     Route::get('/purchase/{displayId}/form', [MainController::class, 'handler'])->name('main.handler');
     Route::post('/purchase/{displayId}/form', [MainController::class, 'procedure']);

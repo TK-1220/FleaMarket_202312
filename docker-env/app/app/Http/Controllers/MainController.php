@@ -31,18 +31,19 @@ class MainController extends Controller
         ]);
     }
 
-
     public function ajaxlike(Request $request)
     {
         $id = Auth::user()->id;
         $display_id = $request->display_id;
+
         $like = new Like;
         $display = ListDisplays::findOrFail($display_id);
+
         if ($like->like_exist($id, $display_id)) {
             $like = Like::where('display_id', $display_id)->where('user_id', $id)->delete();
         } else {
             $like = new Like;
-            $like->display_id = $request->display_id;
+            $like->display_id = $display_id;
             $like->user_id = Auth::user()->id;
             $like->save();
         }
@@ -60,6 +61,7 @@ class MainController extends Controller
     */
     public function search(Request $request)
     {
+
         $query = ListDisplays::withCount('likes');
 
         $price_0 = $request->price;
@@ -76,7 +78,6 @@ class MainController extends Controller
             $datalist = $datalist->whereBetween("price", [$price_0, $price_1]);
         }
         $like_model = new Like;
-        echo $request->display_id;
         return view('main', [
             'datalist' => $datalist,
             'keyword' => $keyword,

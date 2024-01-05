@@ -1,4 +1,5 @@
 $(function () {
+    console.log('test');
     var like = $('.js-like-toggle');
     var likeDisplayId;
 
