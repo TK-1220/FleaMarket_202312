@@ -1,5 +1,5 @@
 <?php
-
+// var_dump($user);
 ?>
 
 @extends('layouts.layout')

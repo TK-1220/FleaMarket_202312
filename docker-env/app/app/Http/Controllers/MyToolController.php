@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\ListDisplays;
+use App\Follows;
+use App\ListBuys;
+use ListDisplaysTableSeeder;
 use PhpParser\Builder\Use_;
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class MyToolController extends Controller
 {
@@ -18,10 +24,14 @@ class MyToolController extends Controller
     {
         $displays = ListDisplays::where('user_id', $user_id)->get();
 
-        // $historys = ListDisplays
+        // $historys = ListDisplays::with('history')->where('user_id', $user_id)->get();
+        $historys = new ListDisplays;
+        $historys = $historys->join('list-buys', 'list-display.id', 'list-buys.list_id')->get();
+        $historys = $historys->where('user_id', $user_id);
 
         return view('mypage', [
             'displays' => $displays,
+            'historys' => $historys,
         ]);
     }
 
@@ -108,4 +118,19 @@ class MyToolController extends Controller
         }
         return redirect('/');
     }
+
+    public function follow($user_id)
+    {
+        $users = new User;
+        $displays = new ListDisplays;
+        $follows = Auth::user()->follow()->get();
+        // dd($follows);
+
+        return view('follow', [
+            'users' => $users,
+            'follows' => $follows,
+            'displays' => $displays,
+        ]);
+    }
+
 }

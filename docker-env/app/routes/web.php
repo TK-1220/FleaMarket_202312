@@ -6,6 +6,7 @@ use App\Http\Controllers\SampleController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\DisplayController;
 use App\Http\Controllers\MyToolController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,7 @@ Auth::routes();
 Route::get('/', [MainController::class, 'index'])->name('main.index');
 
 Route::group(['middleware' => 'auth'], function() {
+    // Main
     Route::post('/ajaxlike', 'MainController@ajaxlike')->name('main.ajaxlike');
     Route::post('/', [MainController::class, 'search']);
     Route::get('/purchase/{displayId}/form', [MainController::class, 'handler'])->name('main.handler');
@@ -44,28 +46,14 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/mypage/{user_id}/edit', [MyToolController::class, 'edit'])->name('mypage.edit');
     Route::post('/mypage/{user_id}/edit', [MyToolController::class, 'update']);
     Route::get('/mypage/{user_id}/delete', [MyToolController::class, 'destroy'])->name('mypage.delete');
+    Route::get('/mypage/{user_id}/follow', [MyToolController::class, 'follow'])->name('mypage.follow');
+
+    // Admin
+    Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/users/{id}/delete', [AdminController::class, 'deleteUsers'])->name('admin.deleteUser');
+    Route::get('/admin/displays', [AdminController::class, 'displays'])->name('admin.displays');
+    Route::get('/admin/displays/{id}/delete', [AdminController::class, 'deleteDisplay'])->name('admin.deleteDisplay');
+
 
 });
-
-
-
-
-// Route::get('/sample', [SampleController::class, 'sample']);
-Route::get('/register_comp', [SampleController::class, 'registercomp']);
-// Route::get('/register_display', [SampleController::class, 'register_display'])->name('register.display');
-Route::get('/register_complete', [SampleController::class, 'register_complete']);
-Route::get('/purchase', [SampleController::class, 'purchase']);
-Route::get('/buy_complete', [SampleController::class, 'buy_complete']);
-// Route::get('/mypage_edit', [SampleController::class, 'mypage_edit'])->name('my.edit');
-Route::get('/reset', [SampleController::class, 'reset']);
-// Route::get('/mypage', [SampleController::class, 'mypage']);
-// Route::get('/detail', [SampleController::class, 'detail'])->name('detail.form');
-Route::get('/display', [SampleController::class, 'display']);
-
-
-
-
-
-// Route::get('/', function () {
-    //     return view('home');
-    // });

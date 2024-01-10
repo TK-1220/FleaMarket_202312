@@ -26,8 +26,13 @@
         @if(Auth::check() && Auth::user()->del_flg == 0)
         <span class="my-navbar-item">{{ Auth::user()->name }}</span>
         /
+        @if(Auth::user()->root == 0)
+        <a href="{{ route('admin.index') }}" id='admin'>管理画面</a>
+        /
+        @else
         <a href="{{ route('mypage.index', ['user_id' => Auth::user()->id]) }}" id='mypage'>マイページ</a>
         /
+        @endif
         <a href="#" id="logout" class="my-nabvar-item">ログアウト</a>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

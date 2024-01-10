@@ -47,9 +47,13 @@ class MainController extends Controller
             $like->user_id = Auth::user()->id;
             $like->save();
         }
+        // $exist = $like->like_exist($id, $display_id);
+        $exist = Like::where('user_id', $id)->where('display_id', $display_id)->exists();
+        // dd($exist);
         $displayLikesCount = $display->loadCount('likes')->likes_count;
         $json = [
             'displayLikesCount' => $displayLikesCount,
+            'exist' => $exist,
         ];
         return response()->json($json);
     }

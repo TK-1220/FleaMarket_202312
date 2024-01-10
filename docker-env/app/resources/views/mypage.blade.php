@@ -1,7 +1,4 @@
-<?php
-
-?>
-
+<?php ?>
 @extends('layouts.layout')
 @section('content')
 <main>
@@ -16,9 +13,7 @@
     <div class='container'>
         <label for='user_name'>{{ Auth::user()->name }}</label>
         <a href="{{ route('mypage.edit', ['user_id' => Auth::user()->id]) }}">編集</a>
-
-        {{-- <a href="{{ route('following' )}}">フォロー数</a> --}}
-        <a href="#">フォロー一覧</a>
+        <a href="{{ route('mypage.follow', ['user_id' => Auth::user()->id]) }}">フォロー一覧</a>
     </div>
 
     <label for='profile'>{{ Auth::user()->profile }}</label>
@@ -44,13 +39,13 @@
         <h2>購入一覧</h2>
     </div>
 
-    @foreach ($displays as $display)
-        <img src="{{ asset($display['image']) }}" width="200" >
+    @foreach ($historys as $history)
+        <img src="{{ asset($history['image']) }}" width="200" >
         <div>
-            <label name='name'>{{ $display['name'] }}</label>
+            <label name='name'>{{ $history['name'] }}</label>
         </div>
         <div>
-            <a href="{{ route('detail.display', ['displayId' => $display['id']]) }}">商品詳細</a>
+            <a href="{{ route('detail.display', ['displayId' => $history['id']]) }}">商品詳細</a>
         </div>
     @endforeach
 
@@ -62,7 +57,3 @@
 </main>
 
 @endsection
-
-
-
-
