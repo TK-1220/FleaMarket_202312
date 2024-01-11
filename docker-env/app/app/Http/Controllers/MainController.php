@@ -21,6 +21,8 @@ class MainController extends Controller
     */
     public function index(Request $request)
     {
+        $price_low = $request->price_low;
+        $price_high = $request->price_high;
         $keyword = $request->input('keyword');
         $datalist = ListDisplays::withCount('likes')->paginate(10);
         $like_model = new Like;
@@ -28,6 +30,8 @@ class MainController extends Controller
             'datalist' => $datalist,
             'keyword' => $keyword,
             'like_model' => $like_model,
+            'price_low' => $price_low,
+            'price_high' => $price_high,
         ]);
     }
 
@@ -68,9 +72,8 @@ class MainController extends Controller
 
         $query = ListDisplays::withCount('likes');
 
-        $price_0 = $request->price;
-        $price_1 = $price_0 + 5000;
-
+        $price_low = $request->price_low;
+        $price_high = $request->price_high;
         $keyword = $request->input('keyword');
         if (!empty($keyword)) {
             $query->where('profile', 'like', "%{$keyword}%");
@@ -78,14 +81,16 @@ class MainController extends Controller
         }
         $datalist = $query->paginate(10);
 
-        if (!empty($price_0)) {
-            $datalist = $datalist->whereBetween("price", [$price_0, $price_1]);
+        if (!empty($price_low)) {
+            $datalist = $datalist->whereBetween("price", [$price_low, $price_high]);
         }
         $like_model = new Like;
         return view('main', [
             'datalist' => $datalist,
             'keyword' => $keyword,
             'like_model' => $like_model,
+            'price_low' => $price_low,
+            'price_high' => $price_high,
         ]);
     }
 

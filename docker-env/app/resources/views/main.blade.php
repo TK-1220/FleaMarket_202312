@@ -1,8 +1,3 @@
-<?php
-$prices = array();
-for ($i=0; $i<50000; $i=$i+5000) { array_push($prices, [$i, $i+5000]); }
-?>
-
 @extends('layouts.layout')
 @section('content')
 
@@ -12,19 +7,20 @@ for ($i=0; $i<50000; $i=$i+5000) { array_push($prices, [$i, $i+5000]); }
     <form action={{ route("main.index") }} method="post">
         @csrf
         <div>
-            <label for='name'>キーワード</label>
-            <input type="text" class='form-control' name='keyword' value={{ $keyword }} >
+            <label for='type'>キーワード</label>
+            <div>
+                <input type="text" class='form-control' name='keyword' value={{ $keyword }} >
+            </div>
         </div>
         <div>
             <label for='type'>価格</label>
-            <select name='price' class='form-control'>
-                <option value=''>価格帯</option>
-                @foreach($prices as $price)
-                <option value={{ $price[0] }}> {{ $price[0] }}円 ~ {{ $price[1] }}円 </option>
-                @endforeach
-            </select>
+            <div>
+                <input type='text' class=form-control' name='price_low' value={{ $price_low }}>
+                ～
+                <input type='text' class=form-control' name='price_high' value={{ $price_high }}>
+            </div>
         </div>
-        <button type='submit'>検索</button>
+        <button type='submit' class='btn btn-primary'>検索</button>
     </form>
 
     <h2>出品一覧</h2>

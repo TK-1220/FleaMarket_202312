@@ -51,10 +51,16 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deleteDisplay($id)
+    public function deleteDisplay(Request $request)
     {
+        $id = $request->id;
         $display = ListDisplays::find($id);
-        $display->delete();
+        if ($display->del_flg == 0) {
+            $display->del_flg = 1;
+        } else {
+            $display->del_flg = 0;
+        }
+        $display->save();
         $displays = ListDisplays::all();
         return view('admin/admin_displays', [
             'displays' => $displays,
@@ -73,10 +79,16 @@ class AdminController extends Controller
         ]);
     }
 
-    public function deleteUsers($id)
+    public function deleteUsers(Request $request)
     {
+        $id = $request->id;
         $user = User::find($id);
-        // $user->delete();
+        if ($user->del_flg == 0) {
+            $user->del_flg = 1;
+        } else {
+            $user->del_flg = 0;
+        }
+        $user->save();
         $users = User::all();
         return view('admin/admin_users', [
             'users' => $users,

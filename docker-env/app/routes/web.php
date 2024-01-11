@@ -51,9 +51,9 @@ Route::group(['middleware' => 'auth'], function() {
     // Admin
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
-    Route::get('/admin/users/{id}/delete', [AdminController::class, 'deleteUsers'])->name('admin.deleteUser');
+    Route::post('/admin/users', [AdminController::class, 'deleteUsers']);
     Route::get('/admin/displays', [AdminController::class, 'displays'])->name('admin.displays');
-    Route::get('/admin/displays/{id}/delete', [AdminController::class, 'deleteDisplay'])->name('admin.deleteDisplay');
+    Route::post('/admin/displays', [AdminController::class, 'deleteDisplay']);
 
 
 });
