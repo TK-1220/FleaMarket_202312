@@ -21,6 +21,11 @@ class MainController extends Controller
     */
     public function index(Request $request)
     {
+
+        if (!empty(Auth::id()) && Auth::user()->del_flg == 1){
+            return view('use_stop');
+        }
+
         $price_low = $request->price_low;
         $price_high = $request->price_high;
         $keyword = $request->input('keyword');
@@ -81,9 +86,14 @@ class MainController extends Controller
         }
         $datalist = $query->paginate(10);
 
-        if (!empty($price_low)) {
+        if (!empty($price_low) && !empty($price_high)) {
             $datalist = $datalist->whereBetween("price", [$price_low, $price_high]);
+        } elseif(!empty($price_low) && empty($price_high)) {
+            $datalist = $datalist->where("price", '>=', $price_low);
+        } elseif(empty($price_low) && !empty($price_high))  {
+            $datalist = $datalist->where("price", '<=', $price_high);
         }
+
         $like_model = new Like;
         return view('main', [
             'datalist' => $datalist,

@@ -38,5 +38,10 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // public function StopUser()
+    // {
+    //     if
+    //     return view('use_stop');
+    // }
 
 }
