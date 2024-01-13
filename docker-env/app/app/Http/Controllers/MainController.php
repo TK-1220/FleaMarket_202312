@@ -143,8 +143,7 @@ class MainController extends Controller
 
         // User infomation
         $user = User::find($user_id);
-        // $columns = ['realname', 'code', 'address', 'tel_number'];
-        $columns = ['code', 'address', 'tel'];
+        $columns = ['real_name', 'code', 'address', 'tel'];
         foreach ($columns as $column) {
             $user->$column = $request->$column;
         }

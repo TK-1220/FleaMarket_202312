@@ -7,10 +7,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', '家計簿') }}</title>
+    <title>{{ config('app.name', 'FleaMarket') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,33 +23,37 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    家計簿
-                </a>
-            </div>
-            <div class="my-navbar-control">
-                @if(Auth::check())
-                    <span class="my-navbar-item">{{ Auth::user()->name }}</span>
-                    /
-                    <a href="#" id="logout" class="my-navbar-item">ログアウト</a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <script>
-                        document.getElementById('logout').addEventListener('click', function(event) {
-                        event.preventDefault();
-                        document.getElementById('logout-form').submit();
-                        });
-                    </script>
-                @else
-                    <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
-                    /
-                    <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
-                @endif
-            </div>
-        </nav>
+        @if(Auth::check() && Auth::user()->del_flg == 0)
+        <span class="my-navbar-item">{{ Auth::user()->name }}</span>
+        /
+        @if(Auth::user()->root == 0)
+        <a href="{{ route('admin.index') }}" id='admin'>管理画面</a>
+        /
+        @else
+        <a href="{{ route('mypage.index', ['user_id' => Auth::user()->id]) }}" id='mypage'>マイページ</a>
+        /
+        @endif
+        <a href="#" id="logout" class="my-nabvar-item">ログアウト</a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <script>
+            document.getElementById('logout').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('logout-form').submit();
+            });
+        </script>
+
+        @else
+        <a class="my-navbar-item" href="{{ route('login') }}">ログイン</a>
+        /
+        <a class="my-navbar-item" href="{{ route('register') }}">会員登録</a>
+        @endif
+
+        /
+        <a class="my-navbar-item" href="{{ route('main.index') }}">メインページ</a>
+
         @yield('content')
     </div>
 </body>
