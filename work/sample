@@ -1,1 +1,27 @@
 
+# import numpy as np
+# from sklearn.svm import OneClassSVM
+# from sklearn.preprocessing import StandardScaler
+# import matplotlib.pyplot as plt
+
+# def train_one_class_svm(data, kernel='rbf', nu=0.1):
+#     """
+#     One-Class SVMモデルの学習
+    
+#     Parameters:
+#         data: 学習データ
+#         kernel: カーネル関数 ('rbf', 'linear', 'poly')
+#         nu: 異常値として判定するデータの割合
+#     """
+#     # データの標準化
+#     scaler = StandardScaler()
+#     scaled_data = scaler.fit_transform(data)
+    
+#     # One-Class SVMモデルの構築と学習
+#     model = OneClassSVM(kernel=kernel, nu=nu)
+#     model.fit(scaled_data)
+    
+#     return model, scaler
+
+
+
